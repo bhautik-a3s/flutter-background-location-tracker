@@ -4,7 +4,7 @@ import 'dart:math';
 
 import 'package:background_location_tracker/background_location_tracker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+// import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -88,11 +88,11 @@ class _MyAppState extends State<MyApp> {
                       child: const Text('Request Notification permission'),
                       onPressed: _requestNotificationPermission,
                     ),
-                    MaterialButton(
-                      child: const Text('Send notification'),
-                      onPressed: () =>
-                          sendNotification('Hello from another world'),
-                    ),
+                    // MaterialButton(
+                    //   child: const Text('Send notification'),
+                    //   onPressed: () =>
+                    //       sendNotification('Hello from another world'),
+                    // ),
                     MaterialButton(
                       child: const Text('Start Tracking'),
                       onPressed: isTracking
@@ -203,7 +203,7 @@ class Repo {
   Future<void> update(BackgroundLocationUpdateData data) async {
     final text = 'Location Update: Lat: ${data.lat} Lon: ${data.lon}';
     print(text); // ignore: avoid_print
-    sendNotification(text);
+    // sendNotification(text);
     await LocationDao().saveLocation(data);
   }
 }
@@ -242,28 +242,28 @@ class LocationDao {
   Future<void> clear() async => (await prefs).clear();
 }
 
-void sendNotification(String text) {
-  const settings = InitializationSettings(
-    android: AndroidInitializationSettings('app_icon'),
-    iOS: IOSInitializationSettings(
-      requestAlertPermission: false,
-      requestBadgePermission: false,
-      requestSoundPermission: false,
-    ),
-  );
-  FlutterLocalNotificationsPlugin().initialize(
-    settings,
-    onSelectNotification: (data) async {
-      print('ON CLICK $data'); // ignore: avoid_print
-    },
-  );
-  FlutterLocalNotificationsPlugin().show(
-    Random().nextInt(9999),
-    'Title',
-    text,
-    const NotificationDetails(
-      android: AndroidNotificationDetails('test_notification', 'Test'),
-      iOS: IOSNotificationDetails(),
-    ),
-  );
-}
+// void sendNotification(String text) {
+//   const settings = InitializationSettings(
+//     android: AndroidInitializationSettings('app_icon'),
+//     iOS: IOSInitializationSettings(
+//       requestAlertPermission: false,
+//       requestBadgePermission: false,
+//       requestSoundPermission: false,
+//     ),
+//   );
+//   FlutterLocalNotificationsPlugin().initialize(
+//     settings,
+//     onSelectNotification: (data) async {
+//       print('ON CLICK $data'); // ignore: avoid_print
+//     },
+//   );
+//   FlutterLocalNotificationsPlugin().show(
+//     Random().nextInt(9999),
+//     'Title',
+//     text,
+//     const NotificationDetails(
+//       android: AndroidNotificationDetails('test_notification', 'Test'),
+//       iOS: IOSNotificationDetails(),
+//     ),
+//   );
+// }
